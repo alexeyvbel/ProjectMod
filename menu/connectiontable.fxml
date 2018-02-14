@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+
+<TableView fx:id="connectionTable" editable="true" tableMenuButtonVisible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.connectiontableController">
+   <columns>
+      <TableColumn fx:id="cabinet" minWidth="100.0" prefWidth="-1.0" text="cabinet" />
+      <TableColumn fx:id="kks" minWidth="100.0" prefWidth="-1.0" text="kks" />
+      <TableColumn fx:id="page_no" minWidth="40.0" prefWidth="-1.0" text="page_no" />
+      <TableColumn fx:id="page_esg" minWidth="150.0" prefWidth="-1.0" text="page_esg" />
+      <TableColumn fx:id="page_nobi" minWidth="150.0" prefWidth="-1.0" text="page_nobi" />
+      <TableColumn fx:id="value" minWidth="100.0" prefWidth="-1.0" text="value" />
+      <TableColumn fx:id="addr" minWidth="100.0" prefWidth="-1.0" text="addr" />
+      <TableColumn fx:id="het" minWidth="100.0" prefWidth="-1.0" text="het" />
+   </columns>
+   <columnResizePolicy>
+      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+   </columnResizePolicy>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <contextMenu>
+      <ContextMenu>
+        <items>
+            <MenuItem mnemonicParsing="false" onAction="#addToSimulationTable" text="Добавить в окно имитации" />
+          <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Сохранить в файл" />
+        </items>
+      </ContextMenu>
+   </contextMenu>
+</TableView>

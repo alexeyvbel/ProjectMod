@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="604.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.findkksController">
+   <children>
+      <Button id="addSignalButton" layoutX="237.0" layoutY="25.0" mnemonicParsing="false" onAction="#addSignalButton" prefHeight="25.0" prefWidth="92.0" text="Добавить" />
+      <Button id="clearFieldSignalButton" layoutX="234.0" layoutY="209.0" mnemonicParsing="false" onAction="#clearFieldSignalButton" prefHeight="25.0" prefWidth="99.0" text="Очистить" />
+      <ListView id="listviewSignal" fx:id="listViewFindKks" layoutX="19.0" layoutY="129.0" prefHeight="233.0" prefWidth="200.0" />
+      <Label layoutX="19.0" layoutY="79.0" prefHeight="33.0" prefWidth="237.0" text="Перечень сигналов для поиска связей" />
+      <Button id="loadFileButton" fx:id="loadFileButton" disable="true" layoutX="356.0" layoutY="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Загрузить" />
+      <TextField id="fieldSignal" fx:id="textfieldFindKks" layoutX="19.0" layoutY="25.0" onKeyPressed="#enterPressed" prefHeight="25.0" prefWidth="200.0" />
+      <Button id="FindConnectonButton" disable="true" layoutX="237.0" layoutY="129.0" mnemonicParsing="false" onAction="#FindConnectonButton" prefHeight="25.0" prefWidth="92.0" text="Поиск связей" />
+      <Button id="clearFieldSignalButton" layoutX="234.0" layoutY="246.0" mnemonicParsing="false" onAction="#updateListViewFindKks" prefHeight="25.0" prefWidth="99.0" text="Обновить" />
+      <Button id="seaConnectionButton" layoutX="237.0" layoutY="167.0" mnemonicParsing="false" onAction="#seaConnectionButton" prefHeight="25.0" prefWidth="92.0" text="Просмотр" />
+      <CheckBox fx:id="checkBoxInSignal" layoutX="19.0" layoutY="415.0" mnemonicParsing="false" text="Входные сигналы" />
+      <CheckBox fx:id="checkBoxOutSignal" layoutX="19.0" layoutY="440.0" mnemonicParsing="false" text="Выходные сигналы" />
+      <CheckBox fx:id="checkBoxInfluSignal" disable="true" layoutX="19.0" layoutY="464.0" mnemonicParsing="false" text="Воздействие" />
+      <CheckBox fx:id="checkBoxConnectSignal" layoutX="19.0" layoutY="489.0" mnemonicParsing="false" text="Подключения" />
+      <Label layoutX="17.0" layoutY="383.0" prefHeight="33.0" prefWidth="237.0" text="Настройки поиска" />
+      <CheckBox fx:id="checkBoxInSignalTSODU" disable="true" layoutX="19.0" layoutY="514.0" mnemonicParsing="false" text="Входы ТС ОДУ" />
+      <CheckBox fx:id="checkBoxOutSignalTSODU" disable="true" layoutX="19.0" layoutY="539.0" mnemonicParsing="false" text="Выходы ТС ОДУ" />
+   </children>
+</Pane>

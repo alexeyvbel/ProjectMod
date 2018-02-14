@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<TableView fx:id="outputsignalTable" editable="true" tableMenuButtonVisible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.outputsignalController">
+   <columns>
+      <TableColumn fx:id="abonent_id" minWidth="70.0" prefWidth="-1.0" text="abonent_id" />
+      <TableColumn fx:id="page_kks" minWidth="100.0" prefWidth="-1.0" text="page_kks" />
+      <TableColumn fx:id="page_no" minWidth="50.0" prefWidth="-1.0" text="page_no" />
+      <TableColumn fx:id="signalcode" minWidth="70.0" prefWidth="-1.0" text="signalcode" />
+      <TableColumn fx:id="telegram" minWidth="70.0" prefWidth="-1.0" text="telegram" />
+      <TableColumn fx:id="pageright" minWidth="100.0" prefWidth="-1.0" text="pageright" />
+      <TableColumn fx:id="pageright_no" minWidth="50.0" prefWidth="-1.0" text="pageright_no" />
+      <TableColumn fx:id="block" minWidth="70.0" prefWidth="-1.0" text="block" />
+      <TableColumn fx:id="techname" minWidth="70.0" prefWidth="-1.0" text="techname" />
+      <TableColumn fx:id="marker" minWidth="70.0" prefWidth="-1.0" text="marker" />
+   </columns>
+   <columnResizePolicy>
+      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+   </columnResizePolicy>
+   <contextMenu>
+      <ContextMenu>
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Сохранить в файл" />
+        </items>
+      </ContextMenu>
+   </contextMenu>
+</TableView>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane centerShape="false" scaleShape="false" snapToPixel="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.Controller">
+   <top>
+      <MenuBar fx:id="menuBar" centerShape="false" BorderPane.alignment="CENTER">
+        <menus>
+            <Menu mnemonicParsing="false" text="Связи">
+              <items>
+                <MenuItem fx:id="menuItemConnection" mnemonicParsing="false" onAction="#showSceneFindKks" text="Поиск связей" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Селект">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#showSceneSelect" text="Собрать" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
