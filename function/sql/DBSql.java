@@ -335,7 +335,7 @@ public class DBSql {
                         "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
                         "  WHERE a.kks = b.kks\n" +
                         ") as a\n" +
-                        " ORDER a.kks, a.page_no");
+                        " ORDER BY a.kks, a.page_no");
                 break;
             case "[true, false, false, true]" :
                 resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
@@ -345,14 +345,14 @@ public class DBSql {
                         "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
                         "       FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
                         "       WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> a.page_kks))\n" +
-                        "       ORDER BY a.pageleft) b\n" +
+                        "       ) b\n" +
                         "  WHERE  a.kks = b.pageleft\n" +
                         "  UNION ALL\n" +
                         "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
                         "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
                         "  WHERE a.kks = b.kks\n" +
-                        ") as a" +
-                        " ORDER a.kks, a.page_no");
+                        ") as a\n" +
+                        " ORDER BY a.kks, a.page_no");
                 break;
             case "[false, true, false, true]" :
                 resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
@@ -362,14 +362,14 @@ public class DBSql {
                         "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
                         "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
                         "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> b.kks))\n" +
-                        "           ORDER BY a.pageright) b\n" +
+                        "          ) b\n" +
                         "  WHERE a.kks = b.pageright\n" +
                         "  UNION ALL\n" +
                         "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
                         "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
                         "  WHERE a.kks = b.kks\n" +
-                        ") as a" +
-                        " ORDER a.kks, a.page_no");
+                        ") as a\n" +
+                        " ORDER BY a.kks, a.page_no");
                 break;
             case "[true, true, false, true]" :
                 resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
@@ -379,21 +379,21 @@ public class DBSql {
                         "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
                         "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
                         "           WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> a.page_kks))\n" +
-                        "           ORDER BY a.pageleft) b\n" +
+                        "           ) b\n" +
                         "  WHERE  a.kks = b.pageleft\n" +
                         "  UNION ALL\n" +
                         "  SELECT a.cabinet, b.pageright as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
                         "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
                         "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
                         "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> b.kks))\n" +
-                        "           ORDER BY a.pageright) b\n" +
+                        "           ) b\n" +
                         "  WHERE  a.kks = b.pageright\n" +
                         "  UNION ALL\n" +
                         "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
                         "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
                         "  WHERE a.kks = b.kks\n" +
-                        ") as a" +
-                        " ORDER a.kks, a.page_no");
+                        ") as a\n" +
+                        " ORDER BY a.kks, a.page_no");
                 break;
             default:
                 System.out.println("Запрос соединений не отработал\n");

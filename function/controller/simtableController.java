@@ -88,7 +88,7 @@ public class simtableController {
 
                 clipboardString.append(strmarker[0] + ":::::::" + strmarker[1] + ":::" + namekks.substring(2,7) + ":1:1:0:0:1:0:1:1:0:0:1::0:0:");
                 clipboardString.append('\n');
-                clipboardString.append(strmarker[0] + ":::::::ES" +  strtype[1].substring(0,strtype[1].length()-1) + "0:::" + namekks.substring(7,namekks.length()) + ":1:1:0:0:1:0:1:1:0:0:1::0:0:");
+                clipboardString.append(strmarker[0] + ":::::::ES," +  strtype[1].substring(0,strtype[1].length()-1) + "0:::" + namekks.substring(7,namekks.length()) + ":1:1:0:0:1:0:1:1:0:0:1::0:0:");
                 clipboardString.append('\n');
 
             } else if (strtype[0].contains("AAS") || strtype[0].contains("AS")) {
