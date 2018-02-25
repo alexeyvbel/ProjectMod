@@ -5,8 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-
-<TableView fx:id="connectionTable" editable="true" tableMenuButtonVisible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.connectiontableController">
+<TableView fx:id="connectionTable" editable="true" onMouseClicked="#OnMouseClicked" tableMenuButtonVisible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.connectiontableController">
    <columns>
       <TableColumn fx:id="cabinet" minWidth="100.0" prefWidth="-1.0" text="cabinet" />
       <TableColumn fx:id="kks" minWidth="100.0" prefWidth="-1.0" text="kks" />

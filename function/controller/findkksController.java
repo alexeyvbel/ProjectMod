@@ -151,6 +151,12 @@ public class findkksController {
     //Просмотр найденных связей
     public void seaConnectionButton (ActionEvent event) throws IOException, SQLException, Exception{
 
+        //Создаем массив boolean для переключалок
+        valueCheckBox[0] = checkBoxInSignal.isSelected();
+        valueCheckBox[1] = checkBoxOutSignal.isSelected();
+        valueCheckBox[2] = checkBoxInfluSignal.isSelected();
+        valueCheckBox[3] = checkBoxConnectSignal.isSelected();
+
         Stage stage = new Stage();
         StackPane stackPane = new StackPane();
         HBox hBox;
@@ -161,23 +167,26 @@ public class findkksController {
         TableView connectionPane;
         FXMLLoader fxmlLoader;
 
-
-        //Создаем массив boolean для переключалок
-        valueCheckBox[0] = checkBoxInSignal.isSelected();
-        valueCheckBox[1] = checkBoxOutSignal.isSelected();
-        valueCheckBox[2] = checkBoxInfluSignal.isSelected();
-        valueCheckBox[3] = checkBoxConnectSignal.isSelected();
-
         fxmlLoader = new FXMLLoader(getClass().getResource("/menu/inputsignal.fxml"));
         inputsignalPane = fxmlLoader.load();
+        inputsignalController inputsignalController = fxmlLoader.getController();
+        inputsignalController.setSimtableController(simtableController);
+        inputsignalController.setoption(Arrays.toString(valueCheckBox),null);
 
-        outputsignalPane = FXMLLoader.load(getClass().getResource("/menu/outputsignal.fxml"));
+
+        fxmlLoader = new FXMLLoader(getClass().getResource("/menu/outputsignal.fxml"));
+        outputsignalPane = fxmlLoader.load();
+        outputsignalController outputsignalController = fxmlLoader.getController();
+        outputsignalController.setSimtableController(simtableController);
+        outputsignalController.setoption( Arrays.toString(valueCheckBox),null);
 
         fxmlLoader = new FXMLLoader(getClass().getResource("/menu/connectiontable.fxml"));
         connectionPane  = fxmlLoader.load();
         connectiontableController connectiontableController = fxmlLoader.<connectiontableController>getController();
-        connectiontableController.setValcheckbox(Arrays.toString(valueCheckBox));
         connectiontableController.setSimtableController(simtableController);
+        connectiontableController.setoption(Arrays.toString(valueCheckBox), null);
+
+
         int flag = 1;
         switch (Arrays.toString(valueCheckBox)) {
             case "[false, false, false, false]" :

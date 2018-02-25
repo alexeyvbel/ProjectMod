@@ -304,96 +304,179 @@ public class DBSql {
     }
 
     //-------Заполнение таблицы inputsignal
-    public void SQLAInputSignal() throws SQLException {
-        resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
-                ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
-                " FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
-                " WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> b.kks))\n" +
-                " ORDER BY a.page_kks, a.page_no");
+    public void SQLAInputSignal(String kksfind) throws SQLException {
+        if (kksfind == null) {
+            resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
+                    " FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
+                    " WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> a.page_kks))\n" +
+                    " ORDER BY a.page_kks, a.page_no");
+        } else {
+            resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
+                    " FROM dbselect.dbconnection AS a\n" +
+                    " WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = '" + kksfind + "') AND (a.pageleft <> a.page_kks))\n" +
+                    " ORDER BY a.page_kks, a.page_no");
+        }
+
     }
 
 
     //-------Заполнение таблицы outputsignal
-    public void SQLOutputSignal() throws SQLException {
-        resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
-                ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno, '' as block, '' as techname, '' as marker\n" +
-                " FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
-                " WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> b.kks))\n" +
-                " ORDER BY a.page_kks, a.page_no");
+    public void SQLOutputSignal(String kksfind) throws SQLException {
+        if (kksfind == null) {
+            resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno, '' AS block, '' AS techname, '' AS marker\n" +
+                    " FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
+                    " WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> a.page_kks))\n" +
+                    " ORDER BY a.page_kks, a.page_no");
+        } else {
+            resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno, '' AS block, '' AS techname, '' AS marker\n" +
+                    " FROM dbselect.dbconnection AS a\n" +
+                    " WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = '" + kksfind + "') AND (a.pageright <> a.page_kks))\n" +
+                    " ORDER BY a.page_kks, a.page_no");
+        }
     }
 
     //-------Заполнение таблицы connectiontable
-    public void SQLConnectionTable(String value) throws SQLException {
+    public void SQLConnectionTable(String value, String kksfind) throws SQLException {
 
         switch (value) {
 
             case "[false, false, false, true]" :
-                resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
-                        ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
-                        " FROM (\n" +
-                        "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
-                        "  WHERE a.kks = b.kks\n" +
-                        ") as a\n" +
-                        " ORDER BY a.kks, a.page_no");
+                if (kksfind == null) {
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' AS het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
+                            "  WHERE a.kks = b.kks\n" +
+                            ") AS a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                } else {
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' AS het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a\n" +
+                            "  WHERE a.kks = '" + kksfind + "'\n" +
+                            ") AS a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                }
                 break;
             case "[true, false, false, true]" :
-                resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
-                        ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
-                        " FROM (\n" +
-                        "  SELECT a.cabinet, b.pageleft as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
-                        "       FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
-                        "       WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> a.page_kks))\n" +
-                        "       ) b\n" +
-                        "  WHERE  a.kks = b.pageleft\n" +
-                        "  UNION ALL\n" +
-                        "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
-                        "  WHERE a.kks = b.kks\n" +
-                        ") as a\n" +
-                        " ORDER BY a.kks, a.page_no");
+                if (kksfind == null) {
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
+                            ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, b.pageleft as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
+                            "       FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
+                            "       WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> a.page_kks))\n" +
+                            "       ) b\n" +
+                            "  WHERE  a.kks = b.pageleft\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
+                            "  WHERE a.kks = b.kks\n" +
+                            ") as a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                } else {
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
+                            ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, b.pageleft as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
+                            "       FROM dbselect.dbconnection AS a\n" +
+                            "       WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = '" + kksfind + "') AND (a.pageleft <> a.page_kks))\n" +
+                            "       ) b\n" +
+                            "  WHERE  a.kks = b.pageleft\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a\n" +
+                            "  WHERE a.kks = '" + kksfind + "'\n" +
+                            ") as a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                }
                 break;
             case "[false, true, false, true]" :
-                resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
-                        ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
-                        " FROM (\n" +
-                        "  SELECT a.cabinet, b.pageright as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
-                        "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
-                        "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> b.kks))\n" +
-                        "          ) b\n" +
-                        "  WHERE a.kks = b.pageright\n" +
-                        "  UNION ALL\n" +
-                        "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
-                        "  WHERE a.kks = b.kks\n" +
-                        ") as a\n" +
-                        " ORDER BY a.kks, a.page_no");
+                if (kksfind == null){
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
+                            ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, b.pageright as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
+                            "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
+                            "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> a.page_kks))\n" +
+                            "          ) b\n" +
+                            "  WHERE a.kks = b.pageright\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
+                            "  WHERE a.kks = b.kks\n" +
+                            ") as a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                } else {
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
+                            ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, b.pageright as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
+                            "           FROM dbselect.dbconnection AS a\n" +
+                            "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = '" + kksfind + "') AND (a.pageright <> a.page_kks))\n" +
+                            "          ) b\n" +
+                            "  WHERE a.kks = b.pageright\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a\n" +
+                            "  WHERE a.kks = '" + kksfind + "'\n" +
+                            ") as a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                }
                 break;
             case "[true, true, false, true]" :
-                resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
-                        ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
-                        " FROM (\n" +
-                        "  SELECT a.cabinet, b.pageleft as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
-                        "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
-                        "           WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> a.page_kks))\n" +
-                        "           ) b\n" +
-                        "  WHERE  a.kks = b.pageleft\n" +
-                        "  UNION ALL\n" +
-                        "  SELECT a.cabinet, b.pageright as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
-                        "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
-                        "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> b.kks))\n" +
-                        "           ) b\n" +
-                        "  WHERE  a.kks = b.pageright\n" +
-                        "  UNION ALL\n" +
-                        "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
-                        "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
-                        "  WHERE a.kks = b.kks\n" +
-                        ") as a\n" +
-                        " ORDER BY a.kks, a.page_no");
+                if (kksfind == null){
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
+                            ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, b.pageleft as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
+                            "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
+                            "           WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageleft <> a.page_kks))\n" +
+                            "           ) b\n" +
+                            "  WHERE  a.kks = b.pageleft\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, b.pageright as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
+                            "           FROM dbselect.dbconnection AS a, dbselect.findkks AS b\n" +
+                            "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = b.kks) AND (a.pageright <> a.page_kks))\n" +
+                            "           ) b\n" +
+                            "  WHERE  a.kks = b.pageright\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, dbselect.findkks b\n" +
+                            "  WHERE a.kks = b.kks\n" +
+                            ") as a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                } else {
+                    resultSet = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE
+                            ,CONCUR_READ_ONLY).executeQuery("SELECT DISTINCT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr, '' as het\n" +
+                            " FROM (\n" +
+                            "  SELECT a.cabinet, b.pageleft as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.pageleft, a.pageleftno, a.signalcodein, a.telegramin, a.abonent_id, a.page_kks, a.page_no\n" +
+                            "           FROM dbselect.dbconnection AS a\n" +
+                            "           WHERE ((a.pageleft IS NOT NULL) AND (a.page_kks = '" + kksfind + "') AND (a.pageleft <> a.page_kks))\n" +
+                            "           ) b\n" +
+                            "  WHERE  a.kks = b.pageleft\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, b.pageright as kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a, (SELECT DISTINCT a.abonent_id, a.page_kks, a.page_no, a.signalcode, a.telegram, a.pageright, a.pagerightno\n" +
+                            "           FROM dbselect.dbconnection AS a\n" +
+                            "           WHERE ((a.pageright IS NOT NULL) AND (a.page_kks = '" + kksfind + "') AND (a.pageright <> a.page_kks))\n" +
+                            "           ) b\n" +
+                            "  WHERE  a.kks = b.pageright\n" +
+                            "  UNION ALL\n" +
+                            "  SELECT a.cabinet, a.kks, a.page_no, a.page_esg, a.page_nobi, a.value, a.module_addr\n" +
+                            "  FROM dbselect.kksoption a\n" +
+                            "  WHERE a.kks = '" + kksfind + "'\n" +
+                            ") as a\n" +
+                            " ORDER BY a.kks, a.page_no");
+                }
                 break;
             default:
                 System.out.println("Запрос соединений не отработал\n");

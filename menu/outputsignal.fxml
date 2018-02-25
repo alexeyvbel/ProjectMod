@@ -3,7 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
-<TableView fx:id="outputsignalTable" editable="true" tableMenuButtonVisible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.outputsignalController">
+<TableView fx:id="outputsignalTable" editable="true" onMouseClicked="#OnMouseClicked" tableMenuButtonVisible="true" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="function.controller.outputsignalController">
    <columns>
       <TableColumn fx:id="abonent_id" minWidth="70.0" prefWidth="-1.0" text="abonent_id" />
       <TableColumn fx:id="page_kks" minWidth="100.0" prefWidth="-1.0" text="page_kks" />
