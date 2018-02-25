@@ -154,6 +154,15 @@ public class inputsignalController implements Initializable {
     public void OnMouseClicked(MouseEvent event){
 
         if(event.getClickCount()>1){
+            ObservableList<TablePosition> posList = inputsignalTable.getSelectionModel().getSelectedCells();
+            int old_r = -1;
+            //Считываем данные из таблицы
+            for (TablePosition p : posList) {
+
+                int r = p.getRow();
+                int c = p.getColumn();
+                System.out.println("row " + r + " col " + c);
+            }
 
         }
     }
