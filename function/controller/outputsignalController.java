@@ -156,6 +156,7 @@ public class outputsignalController {
         this.kksfind = kksfind;
         this.valcheckbox = valcheckbox;
 
+
         outputsignalTable.getSelectionModel().setCellSelectionEnabled(false);
         outputsignalTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         //Задаем параметры для столбцов таблицы

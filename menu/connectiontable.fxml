@@ -27,6 +27,21 @@
         <items>
             <MenuItem mnemonicParsing="false" onAction="#addToSimulationTable" text="Добавить в окно имитации" />
           <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Сохранить в файл" />
+            <Menu mnemonicParsing="false" text="Фильтр">
+              <items>
+                <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <VBox disable="true" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ListView prefHeight="200.0" prefWidth="200.0" />
+                              <Button mnemonicParsing="false" text="Содержит" />
+                              <Button mnemonicParsing="false" text="Сброс" />
+                           </children>
+                        </VBox>
+                     </graphic>
+                  </MenuItem>
+              </items>
+            </Menu>
         </items>
       </ContextMenu>
    </contextMenu>
